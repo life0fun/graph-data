@@ -1,0 +1,25 @@
+BEGIN
+CREATE VERTEX Address (
+    address STRING PRIMARY KEY,
+    balance DOUBLE,
+    properties STRING
+)
+END
+
+BEGIN
+CREATE DIRECTED EDGE Transaction (
+    From Address,
+    To Address,
+    DISCRIMINATOR(
+        hash STRING,
+        block_hash STRING,
+        block_number INT,
+        block_timestamp DATETIME,
+        value INT,
+        properties STRING
+    )
+)
+END
+
+
+CREATE GRAPH Taint (Address, Transaction)
